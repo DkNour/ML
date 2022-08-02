@@ -114,6 +114,7 @@ def get_risk_level(patient_data):
 
     return(label)
 
-test_input = np.array([ 20,   1,   0,  -1, 121,  83,  94,   0,   0,  22, 207, -1])
+test_input = np.array([ 90,   1,   30,  0, 121,  83,  94,   3,   0,  22, 207, 3])
 
-plot_SHAP_selection(test_input)
+#plot_LIME_selection(test_input)
+print(get_lime_explanation_scores_df(test_input))

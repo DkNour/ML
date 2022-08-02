@@ -5,7 +5,7 @@ import joblib
 from catboost import Pool, CatBoostClassifier
 import pickle
 
-df_all = pd.read_csv('/content/drive/MyDrive/Dataset/Stroke_analysis2.csv', encoding = 'utf-8')
+df_all = pd.read_csv('C:\\Users\\nourd\PycharmProjects\\pythonProject5\\Stroke_analysis1 (1).csv', encoding = 'utf-8')
 label_encode_cols = ["gender"]
 # Convert categorical columns to numeric encoded labels
 label_encoders = {}
@@ -16,7 +16,7 @@ for col in label_encode_cols:
 
 df_all.drop(columns=['pid'], inplace=True)
 df_all = df_all.drop('Unnamed: 0',axis=1)
-df_all = df_all.drop('nihss',axis=1)
+df_all = df_all.drop('nhiss',axis=1)
 df_all = df_all.drop('paralysis',axis=1)
 
 df_all['smoking'] = (df_all['smoking'] != 0).astype(int)
@@ -28,6 +28,9 @@ X_cols = df_all.loc[:, df_all.columns != Y_col].columns
 
 # split the data into train and test set
 X_train, X_test, y_train, y_test = train_test_split(df_all[X_cols], df_all[Y_col],test_size=0.2, random_state=42, shuffle=True)
+
+x_test = pd.concat([X_test, pd.DataFrame(y_test)], axis=1)
+x_test.to_csv ('x_test.csv', index = False, header=True)
 
 features = [feat for feat in list(df_all)
             if feat != 'risk']
